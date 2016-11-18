@@ -35,24 +35,18 @@ class ShippingServiceUT extends TestCase
     public function 黑貓Closure單元測試()
     {
         /** arrange */
-        $mock = $this->createPartialMock(stdClass::class, ['__invoke']);
-
-        $mock->expects($this->once())
-            ->method('__invoke')
-            ->withAnyParameters()
-            ->willReturn(110);
-
-        App::instance(stdClass::class, $mock);
+        $shippingService = new ShippingService();
 
         /** act */
-        $weight = 1;
-        $actual = App::call(ShippingService::class . '@calculateFee', [
-            'weight'    => $weight,
-            'logistics' => $mock,
-        ]);
+        $weight = 10;
 
         /** assert */
-        $expected = 110;
-        $this->assertEquals($expected, $actual);
+        $closure = function($expected) use ($weight) {
+            $this->assertSame($expected, $weight);
+
+            return $weight;
+        };
+
+        $shippingService->calculateFee($weight, $closure);
     }
 }

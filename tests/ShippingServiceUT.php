@@ -31,4 +31,14 @@ class ShippingServiceUT extends TestCase
         $expected = 110;
         $this->assertEquals($expected, $actual);
     }
+
+    /** @test */
+    public function 黑貓Closure單元測試()
+    {
+        /** arrange */
+
+        /** act */
+
+        /** assert */
+    }
 }

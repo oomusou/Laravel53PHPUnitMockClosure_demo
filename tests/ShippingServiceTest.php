@@ -28,4 +28,23 @@ class ShippingServiceTest extends TestCase
         $expected = 110;
         $this->assertEquals($expected, $actual);
     }
+
+    /** @test */
+    public function 黑貓整合測試()
+    {
+        /** arrange */
+
+        /** act */
+        $weight = 1;
+        $actual = App::call(ShippingService::class . '@calculateFee', [
+            'weight'    => $weight,
+            'logistics' => function (int $weight) {
+                return 100 * $weight + 10;
+            },
+        ]);
+
+        /** assert */
+        $expected = 110;
+        $this->assertEquals($expected, $actual);
+    }
 }

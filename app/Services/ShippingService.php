@@ -9,11 +9,11 @@ class ShippingService
     /**
      * 計算運費
      * @param int $weight
-     * @param LogisticsInterface $logistics
+     * @param callable $logistics
      * @return int
      */
-    public function calculateFee(int $weight, LogisticsInterface $logistics) : int
+    public function calculateFee(int $weight, callable $logistics) : int
     {
-        return $logistics->calculateFee($weight);
+        return $logistics($weight);
     }
 }
